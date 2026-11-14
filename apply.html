@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apply | INVESTER (PTY) LTD — NCRCP20409</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#f4f6f8} header{background:#fff;padding:16px 20px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:900;color:#0a3d1e;font-size:20px} nav a{margin-left:14px;text-decoration:none;color:#0a3d1e;font-weight:bold}
+.form{max-width:680px;margin:25px auto;background:#fff;padding:25px;border-radius:12px}
+h2{color:#0a3d1e} label{display:block;margin:14px 0 5px;font-weight:bold}
+input,select,textarea{width:100%;padding:12px;border:1px solid #ccc;border-radius:8px}
+.doc{background:#eef7f0;border:1px dashed #0a6b2e;padding:14px;border-radius:8px;margin-top:10px}
+.doc small{color:#555} .btn{width:100%;background:#ffc107;border:none;padding:15px;border-radius:8px;font-weight:900;font-size:16px;margin-top:20px;cursor:pointer}
+.wa{display:block;text-align:center;margin-top:12px;background:#25D366;color:#fff;padding:12px;border-radius:8px;text-decoration:none;font-weight:bold}
+.note{font-size:12px;color:#666;line-height:1.6;margin-top:12px}
+.calc{background:#fff3cd;padding:14px;border-radius:8px;margin-top:14px}
+</style>
+</head>
+<body>
+<header><div class="logo">INVESTER (PTY) LTD • NCRCP20409</div><nav><a href="index.html">Home</a><a href="apply.html">Apply</a></nav></header>
+
+<div class="form">
+<h2>Credit Application Form</h2>
+<p>Workers & SASSA Pensioners Welcome • Delft South</p>
+
+<!-- CREDIT PROVIDER METHOD: FormSubmit sends all fields + files to Gmail -->
+<form action="https://formsubmit.co/kmochoari1980@gmail.com" method="POST" enctype="multipart/form-data">
+<input type="hidden" name="_subject" value="NEW CREDIT APPLICATION - INVESTER NCRCP20409">
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_template" value="table">
+<input type="hidden" name="_next" value="index.html">
+
+<label>Full Name & Surname *</label><input name="Full Name" required placeholder="As per ID">
+<label>ID Number *</label><input name="ID Number" required maxlength="13" placeholder="13-digit SA ID">
+<label>Cellphone / WhatsApp *</label><input name="Cellphone" required placeholder="073 707 2897">
+<label>Are you a Worker or SASSA Pensioner? *</label>
+<select name="Client Type" required><option value="">Select</option><option>Worker</option><option>SASSA Pensioner</option><option>Self-Employed</option></select>
+<label>Employer / SASSA Grant Type</label><input name="Employer / Grant" placeholder="e.g. Shoprite / Old Age Grant">
+<label>Net Monthly Income *</label><input name="Net Income" type="number" required placeholder="e.g. 4500">
+<label>Monthly Expenses (Rent, Food, Transport, Debts)</label><input name="Monthly Expenses" type="number" placeholder="e.g. 2500">
+<label>Loan Amount Needed *</label>
+<select name="Loan Amount" id="amount" required onchange="calc()">
+<option value="">Select</option><option value="500">R500</option><option value="1000">R1,000</option><option value="1500">R1,500</option><option value="2000">R2,000</option><option value="3000">R3,000</option><option value="5000">R5,000</option>
+</select>
+
+<div class="calc" id="calcBox">Select amount to see example repayment. Final cost will be in your Pre-Agreement as per NCA.</div>
+<script>
+function calc(){
+  let a = document.getElementById('amount').value;
+  // Example ONLY: 50% total cost example as requested by owner - to be replaced by NCA schedule in Pre-Agreement
+  // Real Credit Providers must show Interest + Initiation + Service Fee separately
+  if(a){ let total = Number(a)*1.5; document.getElementById('calcBox').innerHTML = `Example: Borrow R${a} = Repay <b>R${total}</b> in 30 days (example total cost). <br><small>Your signed Pre-Agreement will show Interest + Initiation Fee + Service Fee breakdown as per NCA. Do not sign if you do not agree.</small>`; }
+}
+</script>
+
+<label>Bank Name *</label>
+<select name="Bank" required><option value="">Select Bank</option><option>Capitec</option><option>FNB</option><option>Standard Bank</option><option>ABSA</option><option>Nedbank</option><option>TymeBank</option><option>Postbank / SASSA Card</option><option>Other</option></select>
+<label>Account Number (For Debit Order) *</label><input name="Account Number" required placeholder="Do NOT upload photo of bank card - type number only">
+<label>Payday / Grant Payment Date *</label><input name="Payday" type="date" required>
+
+<!-- 4 DOCUMENTS - EXACTLY AS PER YOUR CALENDAR -->
+<h3 style="margin-top:20px;color:#0a3d1e;">Upload 4 Documents *</h3>
+
+<div class="doc"><label>1. ID Book / Card *</label><small>Front + Back, clear photo / PDF</small><input type="file" name="1_ID_Book_Card" accept=".pdf,.jpg,.jpeg,.png" required></div>
+<div class="doc"><label>2. 3 Months Bank Statements *</label><small>Last 3 months, must show income + name</small><input type="file" name="2_3_Months_Bank_Statements" accept=".pdf,.jpg,.jpeg,.png" required></div>
+<div class="doc"><label>3. Latest Payslip/s (Workers Only)</label><small>SASSA Pensioners: upload SASSA letter / proof of grant instead</small><input type="file" name="3_Latest_Payslip" accept=".pdf,.jpg,.jpeg,.png"></div>
+<div class="doc"><label>4. Proof of Banking / Debit Order Mandate *</label><small>Bank statement header OR stamped bank letter. DO NOT upload photo of bank card.</small><input type="file" name="4_Bank_Debit_Order" accept=".pdf,.jpg,.jpeg,.png" required></div>
+
+<label style="font-weight:normal;margin-top:16px;"><input type="checkbox" required style="width:auto;"> I consent to INVESTER (PTY) LTD checking my affordability, contacting me on WhatsApp, and debiting my account on payday as per signed Debit Order Mandate. I understand this is a credit agreement under the NCA.</label>
+<label style="font-weight:normal;"><input type="checkbox" required style="width:auto;"> I confirm my documents are true and I understand POPIA: my documents are kept confidential and only used for this application.</label>
+
+<button class="btn" type="submit">SUBMIT APPLICATION + UPLOAD 4 DOCUMENTS</button>
+<a class="wa" href="https://wa.me/27737072897?text=Hi%20INVESTER%20NCRCP20409%2C%20I%20just%20submitted%20my%20application%20on%20the%20website." target="_blank">WhatsApp Us: 073 707 2897</a>
+<p class="note">After submit, you get an email copy. INVESTER gets the full application + 4 files in kmochoari1980@gmail.com. Next step: You will be called for affordability + Pre-Agreement to sign.</p>
+</form>
+</div>
+</body>
+</html>
