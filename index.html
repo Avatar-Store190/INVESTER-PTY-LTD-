@@ -9,9 +9,10 @@ body{background:#f4f6f8;color:#222}
 .topbar{background:#0a6b2e;color:#fff;text-align:center;padding:8px;font-size:13px;font-weight:bold}
 header{background:#fff;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.08)}
 .logo{font-size:22px;font-weight:900;color:#0a3d1e;display:flex;align-items:center;gap:10px} .logo span{color:#0a6b2e}
-.logo img{height:45px;width:auto}
+.logo img{height:52px;width:auto;border-radius:6px}
 nav a{margin-left:16px;text-decoration:none;color:#0a3d1e;font-weight:bold}
 .hero{background:#0a3d1e;color:#fff;padding:45px 20px;text-align:center}
+.hero-logo{width:160px;height:160px;object-fit:contain;background:#fff;border-radius:16px;padding:10px;margin:0 auto 14px;display:block}
 .hero h1{font-size:34px} .hero p{max-width:700px;margin:14px auto;font-size:16px;line-height:1.6}
 .motive-box{background:rgba(255,255,255,.12);border:1px dashed #ffc107;max-width:700px;margin:16px auto 0;padding:14px;border-radius:10px;font-style:italic}
 .btn{display:inline-block;background:#ffc107;color:#000;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:900;margin-top:10px;border:none;cursor:pointer}
@@ -22,7 +23,7 @@ nav a{margin-left:16px;text-decoration:none;color:#0a3d1e;font-weight:bold}
 .ncr{background:#fff;border:2px solid #0a6b2e;border-radius:10px;padding:20px;margin-top:20px}
 .ncr b{color:#0a6b2e}
 footer{background:#0a3d1e;color:#fff;text-align:center;padding:20px;font-size:13px;line-height:1.7}
-/* OWNER SECTION - COMBINED INTO HOME */
+.footer-logo{width:90px;height:90px;object-fit:contain;background:#fff;border-radius:12px;padding:6px;margin:0 auto 10px;display:block}
 .owner-wrap{max-width:900px;margin:0 auto 30px;padding:0 20px}
 .owner-box{background:#fff;border:2px solid #0a6b2e;border-radius:12px;padding:22px}
 .owner-box h2{color:#0a3d1e} .owner-box h3{color:#0a3d1e;margin-top:20px;border-top:1px solid #eee;padding-top:14px}
@@ -37,10 +38,10 @@ footer{background:#0a3d1e;color:#fff;text-align:center;padding:20px;font-size:13
 </head>
 <body>
 <div class="topbar">REGISTERED CREDIT PROVIDER • NCRCP20409 • NATIONAL CREDIT ACT 34 OF 2005</div>
-<header><div class="logo"><img id="companyLogo" src="" alt="" style="display:none;"> <span>INVESTER <span>(PTY) LTD</span></span></div><nav><a href="index.html">Home</a><a href="apply.html">Apply Now</a></nav></header>
+<header><div class="logo"><img id="companyLogo" src="" alt="INVESTER Logo"> <span>INVESTER <span>(PTY) LTD</span></span></div><nav><a href="index.html">Home</a><a href="apply.html">Apply Now</a></nav></header>
 
-<!-- ============ HOME ============ -->
 <section class="hero">
+<img id="heroLogo" src="" alt="INVESTER (PTY) LTD Logo" class="hero-logo">
 <h1>Loans for Workers & SASSA Pensioners</h1>
 <p>INVESTER (PTY) LTD — Proudly Black Female-owned, based in Delft South, Western Cape. Fast, responsible loans with a clear agreement, no hidden fees. SASSA Pensioners Welcome.</p>
 <div class="motive-box" id="motiveBox" style="display:none;"><b>Our Motive:</b> <span id="companyMotive"></span></div>
@@ -70,47 +71,37 @@ This includes Interest + Initiation Fee + Monthly Service Fee as allowed by the 
 </div>
 </div>
 
-<!-- ============ OWNER DASHBOARD - COMBINED INTO HOME, AT BOTTOM ============ -->
 <div class="owner-wrap">
 <div class="owner-box">
-<!-- LOGIN VIEW -->
 <div id="owner-login-view">
 <h2>Owner Dashboard</h2>
 <p style="margin-top:6px;font-size:14px;color:#555;">Only the owner can enter here.</p>
 <label>Owner Password</label>
-<input type="password" id="loginPass" placeholder="Owner password">
+<input type="password" id="loginPass" placeholder="Enter owner password">
 <button class="btn" style="width:100%;" onclick="ownerLogin()">LOGIN TO DASHBOARD</button>
 <p id="loginMsg" style="color:red;margin-top:10px;font-weight:bold;"></p>
-<p style="margin-top:8px;font-size:12px;color:#888;">First time password: invester2026</p>
 </div>
-
-<!-- DASHBOARD VIEW - shows after login, still on Home -->
 <div id="owner-dash-view" style="display:none;">
 <h2>Owner Dashboard — Welcome Owner ✅</h2>
-<p style="margin-top:6px;font-size:14px;color:#555;">You are editing your Homepage live. Changes show at the top instantly after Save.</p>
-
+<p style="margin-top:6px;font-size:14px;color:#555;">Your logo is already embedded in the code. Upload a new one only if you want to change it.</p>
 <h3>1. Company Logo</h3>
 <input type="file" id="logoInput" accept="image/*">
-<div class="preview"><img id="logoPreview" src="" style="display:none;"><p id="noLogo" style="color:#888;">No logo saved yet</p></div>
-<button type="button" onclick="removeLogo()" style="background:none;border:none;color:red;cursor:pointer;margin-top:8px;">Remove Logo</button>
-
+<div class="preview"><img id="logoPreview" src=""></div>
+<button type="button" onclick="removeLogo()" style="background:none;border:none;color:red;cursor:pointer;margin-top:8px;">Reset to Embedded Original Logo</button>
 <h3>2. Our Motive</h3>
 <label>Why do we serve our people?</label>
 <textarea id="motiveInput" placeholder="e.g. We help workers & SASSA pensioners in Delft South get fast, fair, responsible credit..."></textarea>
-
 <h3>3. Contact Details</h3>
-<label>Phone Number (shown on site)</label><input type="text" id="phoneInput">
-<label>Email Address</label><input type="email" id="emailInput">
-<label>WhatsApp Number (with country code, no + or spaces)</label><input type="text" id="waInput">
-<small style="color:#888;">WhatsApp: Start with 27</small>
-
+<label>Phone Number</label><input type="text" id="phoneInput" placeholder="073 364 2819">
+<label>Email Address</label><input type="email" id="emailInput" placeholder="thandozamahle@gmail.com">
+<label>WhatsApp Number (with country code, no + or spaces)</label><input type="text" id="waInput" placeholder="27733642819">
+<small style="color:#888;">WhatsApp: Start with 27, e.g. 27733642819 for 073 364 2819</small>
 <h3>4. Change Password</h3>
 <label>Current Password</label><input type="password" id="currentPass" placeholder="Current password">
 <label>New Password</label><input type="password" id="newPass" placeholder="New password">
 <label>Confirm New Password</label><input type="password" id="confirmPass" placeholder="Type new password again">
 <button class="btn-green" onclick="changePassword()">CHANGE PASSWORD</button>
 <p id="passMsg" style="margin-top:10px;font-weight:bold;"></p>
-
 <h3>5. Save All Changes</h3>
 <label>Enter Password to Save</label><input type="password" id="passInput" placeholder="Enter your password to save">
 <button class="btn" style="width:100%;" onclick="saveAll()">SAVE LOGO + MOTIVE + CONTACTS</button>
@@ -121,12 +112,15 @@ This includes Interest + Initiation Fee + Monthly Service Fee as allowed by the 
 </div>
 
 <footer>
+<img id="footerLogo" src="" alt="INVESTER Logo" class="footer-logo">
 INVESTER (PTY) LTD • NCRCP20409 • Delft South, Western Cape<br>
 <span class="emailText">thandozamahle@gmail.com</span> • <span class="phoneText">073 364 2819</span><br>
 © 2026 INVESTER (PTY) LTD. Loans subject to affordability assessment. Late payment fees as per NCA.
 </footer>
 
 <script>
+// ===== EMBEDDED LOGO - YOUR IMAGE, INSIDE THE CODE, NO SEPARATE FILE =====
+const DEFAULT_LOGO = "data:image/jpeg;base64,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";
 function getPass(){ return localStorage.getItem('invester_pass') || 'invester2026'; }
 function ownerLogin(){
   let v = document.getElementById('loginPass').value;
@@ -140,7 +134,7 @@ function ownerLogin(){
 function ownerLogout(){ document.getElementById('loginPass').value=''; document.getElementById('owner-login-view').style.display='block'; document.getElementById('owner-dash-view').style.display='none'; }
 function loadDashboard(){
   let logo = localStorage.getItem('invester_logo');
-  if(logo){ document.getElementById('logoPreview').src=logo; document.getElementById('logoPreview').style.display='block'; document.getElementById('noLogo').style.display='none'; }
+  if(logo){ document.getElementById('logoPreview').src=logo; }
   if(localStorage.getItem('invester_motive')) document.getElementById('motiveInput').value=localStorage.getItem('invester_motive');
   if(localStorage.getItem('invester_phone')) document.getElementById('phoneInput').value=localStorage.getItem('invester_phone');
   if(localStorage.getItem('invester_email')) document.getElementById('emailInput').value=localStorage.getItem('invester_email');
@@ -149,10 +143,15 @@ function loadDashboard(){
 document.getElementById('logoInput').addEventListener('change', function(e){
   let file = e.target.files[0]; if(!file) return;
   let reader = new FileReader();
-  reader.onload = function(ev){ document.getElementById('logoPreview').src=ev.target.result; document.getElementById('logoPreview').style.display='block'; document.getElementById('noLogo').style.display='none'; window.tempLogo=ev.target.result; };
+  reader.onload = function(ev){ document.getElementById('logoPreview').src=ev.target.result; window.tempLogo=ev.target.result; };
   reader.readAsDataURL(file);
 });
-function removeLogo(){ localStorage.removeItem('invester_logo'); window.tempLogo=''; document.getElementById('logoPreview').style.display='none'; document.getElementById('noLogo').style.display='block'; document.getElementById('msg').innerText='Logo removed. Click SAVE.'; applySaved(); }
+function removeLogo(){
+  localStorage.removeItem('invester_logo'); window.tempLogo='';
+  document.getElementById('logoPreview').src=DEFAULT_LOGO;
+  document.getElementById('msg').innerText='Reset to embedded original logo. Click SAVE.';
+  applySaved();
+}
 function changePassword(){
   let cur=document.getElementById('currentPass').value, nw=document.getElementById('newPass').value, cf=document.getElementById('confirmPass').value, msg=document.getElementById('passMsg');
   if(cur !== getPass()){ msg.style.color='red'; msg.innerText='❌ Wrong current password.'; return; }
@@ -177,8 +176,13 @@ function saveAll(){
   applySaved();
 }
 function applySaved(){
-  let logo=localStorage.getItem('invester_logo'), motive=localStorage.getItem('invester_motive'), phone=localStorage.getItem('invester_phone'), email=localStorage.getItem('invester_email');
-  if(logo){ let img=document.getElementById('companyLogo'); img.src=logo; img.style.display='block'; }
+  let logo=localStorage.getItem('invester_logo');
+  let useLogo = logo || DEFAULT_LOGO;
+  document.getElementById('companyLogo').src=useLogo;
+  document.getElementById('heroLogo').src=useLogo;
+  document.getElementById('footerLogo').src=useLogo;
+  document.getElementById('logoPreview').src=useLogo;
+  let motive=localStorage.getItem('invester_motive'), phone=localStorage.getItem('invester_phone'), email=localStorage.getItem('invester_email');
   if(motive){ document.getElementById('motiveBox').style.display='block'; document.getElementById('companyMotive').innerText=motive; }
   if(phone){ document.querySelectorAll('.phoneText').forEach(el=>el.innerText=phone); }
   if(email){ document.querySelectorAll('.emailText').forEach(el=>el.innerText=email); }
