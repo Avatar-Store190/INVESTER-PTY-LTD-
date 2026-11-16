@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Owner Dashboard | INVESTER (PTY) LTD</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#f4f6f8;padding:20px}
+.box{max-width:650px;margin:auto;background:#fff;padding:25px;border-radius:12px}
+h2{color:#0a3d1e} h3{color:#0a3d1e;margin-top:22px;border-top:1px solid #eee;padding-top:16px}
+label{display:block;margin:14px 0 5px;font-weight:bold}
+input,textarea{width:100%;padding:12px;border:1px solid #ccc;border-radius:8px}
+textarea{min-height:90px}
+.btn{width:100%;background:#ffc107;border:none;padding:15px;border-radius:8px;font-weight:900;font-size:16px;margin-top:18px;cursor:pointer}
+.btn-green{width:100%;background:#0a6b2e;color:#fff;border:none;padding:13px;border-radius:8px;font-weight:900;margin-top:12px;cursor:pointer}
+.preview{margin-top:12px;text-align:center}
+.preview img{max-width:220px;max-height:140px;object-fit:contain;border:1px dashed #ccc;padding:10px;border-radius:8px}
+.note{font-size:12px;color:#666;margin-top:12px;line-height:1.6}
+a{color:#0a6b2e;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="box">
+<h2>Owner Dashboard — INVESTER (PTY) LTD</h2>
+<p style="margin-top:8px;">Change your logo, motive, contacts & password here. It updates your homepage automatically.</p>
+
+<h3>1. Company Logo</h3>
+<input type="file" id="logoInput" accept="image/*">
+<div class="preview"><img id="logoPreview" src="" style="display:none;"><p id="noLogo" style="color:#888;">No logo saved yet</p></div>
+<button type="button" onclick="removeLogo()" style="background:none;border:none;color:red;cursor:pointer;margin-top:8px;">Remove Logo</button>
+
+<h3>2. Our Motive</h3>
+<label>Why do we serve our people?</label>
+<textarea id="motiveInput" placeholder="e.g. We help workers & SASSA pensioners in Delft South get fast, fair, responsible credit with no hidden fees — so you can handle emergencies with dignity."></textarea>
+
+<h3>3. Contact Details</h3>
+<label>Phone Number (shown on site)</label>
+<input type="text" id="phoneInput">
+<label>Email Address</label>
+<input type="email" id="emailInput">
+<label>WhatsApp Number (with country code, no + or spaces)</label>
+<input type="text" id="waInput">
+<small style="color:#888;">WhatsApp: Start with 27 for South Africa</small>
+
+<h3>4. Change Password</h3>
+<label>Current Password</label>
+<input type="password" id="currentPass" placeholder="Current password">
+<label>New Password</label>
+<input type="password" id="newPass" placeholder="New password">
+<label>Confirm New Password</label>
+<input type="password" id="confirmPass" placeholder="Type new password again">
+<button class="btn-green" onclick="changePassword()">CHANGE PASSWORD</button>
+<p id="passMsg" style="margin-top:10px;font-weight:bold;"></p>
+
+<h3>5. Save All Changes</h3>
+<label>Enter Password to Save (current password)</label>
+<input type="password" id="passInput" placeholder="Enter your password to save">
+<button class="btn" onclick="saveAll()">SAVE LOGO + MOTIVE + CONTACTS</button>
+<p id="msg" style="margin-top:12px;font-weight:bold;color:#0a6b2e;"></p>
+
+<p class="note">Default password first time is: <b>invester2026</b>. After you change it, use your new one. Your changes are saved in this browser/phone.</p>
+<a href="index.html">← Back to Homepage</a>
+</div>
+
+<script>
+function getPass(){ return localStorage.getItem('invester_pass') || 'invester2026'; }
+
+// Load saved
+let savedLogo = localStorage.getItem('invester_logo');
+let savedMotive = localStorage.getItem('invester_motive');
+if(savedLogo){ document.getElementById('logoPreview').src=savedLogo; document.getElementById('logoPreview').style.display='block'; document.getElementById('noLogo').style.display='none'; }
+if(savedMotive) document.getElementById('motiveInput').value=savedMotive;
+if(localStorage.getItem('invester_phone')) document.getElementById('phoneInput').value=localStorage.getItem('invester_phone');
+if(localStorage.getItem('invester_email')) document.getElementById('emailInput').value=localStorage.getItem('invester_email');
+if(localStorage.getItem('invester_wa')) document.getElementById('waInput').value=localStorage.getItem('invester_wa');
+
+document.getElementById('logoInput').addEventListener('change', function(e){
+  let file = e.target.files[0]; if(!file) return;
+  let reader = new FileReader();
+  reader.onload = function(ev){
+    document.getElementById('logoPreview').src = ev.target.result;
+    document.getElementById('logoPreview').style.display='block';
+    document.getElementById('noLogo').style.display='none';
+    window.tempLogo = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+});
+
+function removeLogo(){
+  localStorage.removeItem('invester_logo'); window.tempLogo = '';
+  document.getElementById('logoPreview').style.display='none';
+  document.getElementById('noLogo').style.display='block';
+  document.getElementById('msg').innerText = 'Logo removed. Remember to click SAVE.';
+}
+
+function changePassword(){
+  let cur = document.getElementById('currentPass').value;
+  let nw = document.getElementById('newPass').value;
+  let cf = document.getElementById('confirmPass').value;
+  let msg = document.getElementById('passMsg');
+  if(cur !== getPass()){ msg.style.color='red'; msg.innerText='❌ Wrong current password.'; return; }
+  if(nw.length < 4){ msg.style.color='red'; msg.innerText='❌ New password must be at least 4 characters.'; return; }
+  if(nw !== cf){ msg.style.color='red'; msg.innerText='❌ New passwords do not match.'; return; }
+  localStorage.setItem('invester_pass', nw);
+  msg.style.color='#0a6b2e'; msg.innerText='✅ Password changed! Use your new password to Save next time.';
+  document.getElementById('currentPass').value=''; document.getElementById('newPass').value=''; document.getElementById('confirmPass').value='';
+}
+
+function saveAll(){
+  let pass = document.getElementById('passInput').value;
+  if(pass !== getPass()){ alert('Wrong password'); return; }
+  let motive = document.getElementById('motiveInput').value.trim();
+  let phone = document.getElementById('phoneInput').value.trim();
+  let email = document.getElementById('emailInput').value.trim();
+  let wa = document.getElementById('waInput').value.trim().replace(/[^0-9]/g,'');
+  if(window.tempLogo) localStorage.setItem('invester_logo', window.tempLogo);
+  if(motive) localStorage.setItem('invester_motive', motive);
+  if(phone) localStorage.setItem('invester_phone', phone);
+  if(email) localStorage.setItem('invester_email', email);
+  if(wa) localStorage.setItem('invester_wa', wa);
+  document.getElementById('msg').innerText = '✅ Saved! Go to Homepage to see your changes.';
+}
+</script>
+</body>
+</html>
