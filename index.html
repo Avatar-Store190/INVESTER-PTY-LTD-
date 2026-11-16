@@ -14,7 +14,7 @@ nav a{margin-left:16px;text-decoration:none;color:#0a3d1e;font-weight:bold}
 .hero{background:#0a3d1e;color:#fff;padding:45px 20px;text-align:center}
 .hero h1{font-size:34px} .hero p{max-width:700px;margin:14px auto;font-size:16px;line-height:1.6}
 .motive-box{background:rgba(255,255,255,.12);border:1px dashed #ffc107;max-width:700px;margin:16px auto 0;padding:14px;border-radius:10px;font-style:italic}
-.btn{display:inline-block;background:#ffc107;color:#000;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:900;margin-top:10px}
+.btn{display:inline-block;background:#ffc107;color:#000;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:900;margin-top:10px;border:none;cursor:pointer}
 .wrap{max-width:900px;margin:auto;padding:30px 20px}
 .grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:16px}
 .card{background:#fff;padding:20px;border-radius:10px}
@@ -22,6 +22,16 @@ nav a{margin-left:16px;text-decoration:none;color:#0a3d1e;font-weight:bold}
 .ncr{background:#fff;border:2px solid #0a6b2e;border-radius:10px;padding:20px;margin-top:20px}
 .ncr b{color:#0a6b2e}
 footer{background:#0a3d1e;color:#fff;text-align:center;padding:20px;font-size:13px;line-height:1.7}
+/* OWNER SECTION - COMBINED INTO HOME */
+.owner-wrap{max-width:900px;margin:0 auto 30px;padding:0 20px}
+.owner-box{background:#fff;border:2px solid #0a6b2e;border-radius:12px;padding:22px}
+.owner-box h2{color:#0a3d1e} .owner-box h3{color:#0a3d1e;margin-top:20px;border-top:1px solid #eee;padding-top:14px}
+.owner-box label{display:block;margin:12px 0 5px;font-weight:bold}
+.owner-box input,.owner-box textarea{width:100%;padding:12px;border:1px solid #ccc;border-radius:8px}
+.owner-box textarea{min-height:80px}
+.btn-green{width:100%;background:#0a6b2e;color:#fff;border:none;padding:13px;border-radius:8px;font-weight:900;margin-top:12px;cursor:pointer}
+.preview{text-align:center;margin-top:12px}
+.preview img{max-width:220px;max-height:140px;object-fit:contain;border:1px dashed #ccc;padding:10px;border-radius:8px}
 @media(max-width:700px){.grid{grid-template-columns:1fr} header{flex-direction:column;gap:10px}}
 </style>
 </head>
@@ -29,12 +39,13 @@ footer{background:#0a3d1e;color:#fff;text-align:center;padding:20px;font-size:13
 <div class="topbar">REGISTERED CREDIT PROVIDER • NCRCP20409 • NATIONAL CREDIT ACT 34 OF 2005</div>
 <header><div class="logo"><img id="companyLogo" src="" alt="" style="display:none;"> <span>INVESTER <span>(PTY) LTD</span></span></div><nav><a href="index.html">Home</a><a href="apply.html">Apply Now</a></nav></header>
 
+<!-- ============ HOME ============ -->
 <section class="hero">
 <h1>Loans for Workers & SASSA Pensioners</h1>
 <p>INVESTER (PTY) LTD — Proudly Black Female-owned, based in Delft South, Western Cape. Fast, responsible loans with a clear agreement, no hidden fees. SASSA Pensioners Welcome.</p>
 <div class="motive-box" id="motiveBox" style="display:none;"><b>Our Motive:</b> <span id="companyMotive"></span></div>
 <a class="btn" href="apply.html">APPLY ONLINE — 5 MINUTES</a>
-<p style="margin-top:14px;font-size:14px;">📍 Invester - Suburban Delft South &nbsp;|&nbsp; 📧 <span id="topEmail">thandozamahle@gmail.com</span> &nbsp;|&nbsp; 📱 <span id="topPhone">073 364 2819</span></p>
+<p style="margin-top:14px;font-size:14px;">📍 Invester - Suburban Delft South &nbsp;|&nbsp; 📧 <span class="emailText">thandozamahle@gmail.com</span> &nbsp;|&nbsp; 📱 <span class="phoneText">073 364 2819</span></p>
 </section>
 
 <div class="wrap">
@@ -44,7 +55,6 @@ footer{background:#0a3d1e;color:#fff;text-align:center;padding:20px;font-size:13
 <div class="card"><h3>2. Affordability Check</h3><p>We check your income vs expenses as required by the NCA. We never lend what you cannot afford.</p></div>
 <div class="card"><h3>3. Sign & Get Paid</h3><p>You get a Pre-Agreement + Credit Agreement to sign. Then EFT + Debit Order on your payday.</p></div>
 </div>
-
 <div class="ncr">
 <h2>Loan Example — As Per NCA Disclosure</h2>
 <p style="margin-top:10px;line-height:1.8;">
@@ -60,21 +70,120 @@ This includes Interest + Initiation Fee + Monthly Service Fee as allowed by the 
 </div>
 </div>
 
+<!-- ============ OWNER DASHBOARD - COMBINED INTO HOME, AT BOTTOM ============ -->
+<div class="owner-wrap">
+<div class="owner-box">
+<!-- LOGIN VIEW -->
+<div id="owner-login-view">
+<h2>Owner Dashboard</h2>
+<p style="margin-top:6px;font-size:14px;color:#555;">Only the owner can enter here.</p>
+<label>Owner Password</label>
+<input type="password" id="loginPass" placeholder="Owner password">
+<button class="btn" style="width:100%;" onclick="ownerLogin()">LOGIN TO DASHBOARD</button>
+<p id="loginMsg" style="color:red;margin-top:10px;font-weight:bold;"></p>
+<p style="margin-top:8px;font-size:12px;color:#888;">First time password: invester2026</p>
+</div>
+
+<!-- DASHBOARD VIEW - shows after login, still on Home -->
+<div id="owner-dash-view" style="display:none;">
+<h2>Owner Dashboard — Welcome Owner ✅</h2>
+<p style="margin-top:6px;font-size:14px;color:#555;">You are editing your Homepage live. Changes show at the top instantly after Save.</p>
+
+<h3>1. Company Logo</h3>
+<input type="file" id="logoInput" accept="image/*">
+<div class="preview"><img id="logoPreview" src="" style="display:none;"><p id="noLogo" style="color:#888;">No logo saved yet</p></div>
+<button type="button" onclick="removeLogo()" style="background:none;border:none;color:red;cursor:pointer;margin-top:8px;">Remove Logo</button>
+
+<h3>2. Our Motive</h3>
+<label>Why do we serve our people?</label>
+<textarea id="motiveInput" placeholder="e.g. We help workers & SASSA pensioners in Delft South get fast, fair, responsible credit..."></textarea>
+
+<h3>3. Contact Details</h3>
+<label>Phone Number (shown on site)</label><input type="text" id="phoneInput">
+<label>Email Address</label><input type="email" id="emailInput">
+<label>WhatsApp Number (with country code, no + or spaces)</label><input type="text" id="waInput">
+<small style="color:#888;">WhatsApp: Start with 27</small>
+
+<h3>4. Change Password</h3>
+<label>Current Password</label><input type="password" id="currentPass" placeholder="Current password">
+<label>New Password</label><input type="password" id="newPass" placeholder="New password">
+<label>Confirm New Password</label><input type="password" id="confirmPass" placeholder="Type new password again">
+<button class="btn-green" onclick="changePassword()">CHANGE PASSWORD</button>
+<p id="passMsg" style="margin-top:10px;font-weight:bold;"></p>
+
+<h3>5. Save All Changes</h3>
+<label>Enter Password to Save</label><input type="password" id="passInput" placeholder="Enter your password to save">
+<button class="btn" style="width:100%;" onclick="saveAll()">SAVE LOGO + MOTIVE + CONTACTS</button>
+<p id="msg" style="margin-top:12px;font-weight:bold;color:#0a6b2e;"></p>
+<button onclick="ownerLogout()" style="background:none;border:none;color:red;cursor:pointer;margin-top:12px;width:100%;">Log Out</button>
+</div>
+</div>
+</div>
+
 <footer>
 INVESTER (PTY) LTD • NCRCP20409 • Delft South, Western Cape<br>
-<span id="footEmail">thandozamahle@gmail.com</span> • <span id="footPhone">073 364 2819</span><br>
+<span class="emailText">thandozamahle@gmail.com</span> • <span class="phoneText">073 364 2819</span><br>
 © 2026 INVESTER (PTY) LTD. Loans subject to affordability assessment. Late payment fees as per NCA.
 </footer>
 
 <script>
-let logo = localStorage.getItem('invester_logo');
-let motive = localStorage.getItem('invester_motive');
-let phone = localStorage.getItem('invester_phone');
-let email = localStorage.getItem('invester_email');
-if(logo){ let img=document.getElementById('companyLogo'); img.src=logo; img.style.display='block'; }
-if(motive){ document.getElementById('motiveBox').style.display='block'; document.getElementById('companyMotive').innerText=motive; }
-if(phone){ document.getElementById('topPhone').innerText=phone; document.getElementById('footPhone').innerText=phone; }
-if(email){ document.getElementById('topEmail').innerText=email; document.getElementById('footEmail').innerText=email; }
+function getPass(){ return localStorage.getItem('invester_pass') || 'invester2026'; }
+function ownerLogin(){
+  let v = document.getElementById('loginPass').value;
+  if(v === getPass()){
+    document.getElementById('loginMsg').innerText='';
+    document.getElementById('owner-login-view').style.display='none';
+    document.getElementById('owner-dash-view').style.display='block';
+    loadDashboard();
+  } else document.getElementById('loginMsg').innerText='❌ Wrong password';
+}
+function ownerLogout(){ document.getElementById('loginPass').value=''; document.getElementById('owner-login-view').style.display='block'; document.getElementById('owner-dash-view').style.display='none'; }
+function loadDashboard(){
+  let logo = localStorage.getItem('invester_logo');
+  if(logo){ document.getElementById('logoPreview').src=logo; document.getElementById('logoPreview').style.display='block'; document.getElementById('noLogo').style.display='none'; }
+  if(localStorage.getItem('invester_motive')) document.getElementById('motiveInput').value=localStorage.getItem('invester_motive');
+  if(localStorage.getItem('invester_phone')) document.getElementById('phoneInput').value=localStorage.getItem('invester_phone');
+  if(localStorage.getItem('invester_email')) document.getElementById('emailInput').value=localStorage.getItem('invester_email');
+  if(localStorage.getItem('invester_wa')) document.getElementById('waInput').value=localStorage.getItem('invester_wa');
+}
+document.getElementById('logoInput').addEventListener('change', function(e){
+  let file = e.target.files[0]; if(!file) return;
+  let reader = new FileReader();
+  reader.onload = function(ev){ document.getElementById('logoPreview').src=ev.target.result; document.getElementById('logoPreview').style.display='block'; document.getElementById('noLogo').style.display='none'; window.tempLogo=ev.target.result; };
+  reader.readAsDataURL(file);
+});
+function removeLogo(){ localStorage.removeItem('invester_logo'); window.tempLogo=''; document.getElementById('logoPreview').style.display='none'; document.getElementById('noLogo').style.display='block'; document.getElementById('msg').innerText='Logo removed. Click SAVE.'; applySaved(); }
+function changePassword(){
+  let cur=document.getElementById('currentPass').value, nw=document.getElementById('newPass').value, cf=document.getElementById('confirmPass').value, msg=document.getElementById('passMsg');
+  if(cur !== getPass()){ msg.style.color='red'; msg.innerText='❌ Wrong current password.'; return; }
+  if(nw.length < 4){ msg.style.color='red'; msg.innerText='❌ New password must be at least 4 characters.'; return; }
+  if(nw !== cf){ msg.style.color='red'; msg.innerText='❌ New passwords do not match.'; return; }
+  localStorage.setItem('invester_pass', nw); msg.style.color='#0a6b2e'; msg.innerText='✅ Password changed! Use new password to Save next time.';
+  document.getElementById('currentPass').value=''; document.getElementById('newPass').value=''; document.getElementById('confirmPass').value='';
+}
+function saveAll(){
+  let pass=document.getElementById('passInput').value;
+  if(pass !== getPass()){ alert('Wrong password'); return; }
+  let motive=document.getElementById('motiveInput').value.trim();
+  let phone=document.getElementById('phoneInput').value.trim();
+  let email=document.getElementById('emailInput').value.trim();
+  let wa=document.getElementById('waInput').value.trim().replace(/[^0-9]/g,'');
+  if(window.tempLogo) localStorage.setItem('invester_logo', window.tempLogo);
+  if(motive) localStorage.setItem('invester_motive', motive);
+  if(phone) localStorage.setItem('invester_phone', phone);
+  if(email) localStorage.setItem('invester_email', email);
+  if(wa) localStorage.setItem('invester_wa', wa);
+  document.getElementById('msg').innerText='✅ Saved! Scroll up — your Homepage changed.';
+  applySaved();
+}
+function applySaved(){
+  let logo=localStorage.getItem('invester_logo'), motive=localStorage.getItem('invester_motive'), phone=localStorage.getItem('invester_phone'), email=localStorage.getItem('invester_email');
+  if(logo){ let img=document.getElementById('companyLogo'); img.src=logo; img.style.display='block'; }
+  if(motive){ document.getElementById('motiveBox').style.display='block'; document.getElementById('companyMotive').innerText=motive; }
+  if(phone){ document.querySelectorAll('.phoneText').forEach(el=>el.innerText=phone); }
+  if(email){ document.querySelectorAll('.emailText').forEach(el=>el.innerText=email); }
+}
+applySaved();
 </script>
 </body>
 </html>
