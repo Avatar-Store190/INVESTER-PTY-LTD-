@@ -15,6 +15,9 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ccc;border-radiu
 .wa{display:block;text-align:center;margin-top:12px;background:#25D366;color:#fff;padding:12px;border-radius:8px;text-decoration:none;font-weight:bold}
 .note{font-size:12px;color:#666;line-height:1.6;margin-top:12px}
 .calc{background:#fff3cd;padding:14px;border-radius:8px;margin-top:14px}
+.amount-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.amount-btns button{flex:1;padding:12px;border:1px solid #0a6b2e;background:#fff;color:#0a3d1e;border-radius:8px;font-weight:bold;cursor:pointer}
+.amount-btns button.active{background:#0a6b2e;color:#fff}
 </style>
 </head>
 <body>
@@ -25,7 +28,7 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ccc;border-radiu
 <p>Workers & SASSA Pensioners Welcome • Delft South</p>
 
 <!-- CREDIT PROVIDER METHOD: FormSubmit sends all fields + files to Gmail -->
-<form action="https://formsubmit.co/thandozamahle@gmail.com" method="POST" enctype="multipart/form-data">
+<form action="https://formsubmit.co/kmochoari1980@gmail.com" method="POST" enctype="multipart/form-data">
 <input type="hidden" name="_subject" value="NEW CREDIT APPLICATION - INVESTER NCRCP20409">
 <input type="hidden" name="_captcha" value="false">
 <input type="hidden" name="_template" value="table">
@@ -33,29 +36,34 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ccc;border-radiu
 
 <label>Full Name & Surname *</label><input name="Full Name" required placeholder="As per ID">
 <label>ID Number *</label><input name="ID Number" required maxlength="13" placeholder="13-digit SA ID">
-<label>Cellphone / WhatsApp *</label><input name="Cellphone" required placeholder="073 364 2819">
+<label>Cellphone / WhatsApp *</label><input name="Cellphone" required placeholder="073 707 2897">
 <label>Are you a Worker or SASSA Pensioner? *</label>
 <select name="Client Type" required><option value="">Select</option><option>Worker</option><option>SASSA Pensioner</option><option>Self-Employed</option></select>
 <label>Employer / SASSA Grant Type</label><input name="Employer / Grant" placeholder="e.g. Shoprite / Old Age Grant">
 <label>Net Monthly Income *</label><input name="Net Income" type="number" required placeholder="e.g. 4500">
 <label>Monthly Expenses (Rent, Food, Transport, Debts)</label><input name="Monthly Expenses" type="number" placeholder="e.g. 2500">
-<label>Loan Amount Needed *</label>
-<select name="Loan Amount" id="amount" required onchange="calc()">
-<div class="form-group">
-  <label for="loan_amount">How much do you want to borrow? (Amount in Rands) *</label>
-  <input type="number" id="loan_amount" name="loan_amount" placeholder="e.g. 1000" min="100" max="10000" step="50" required>
-  <small style="color:#666;">Tap a quick amount or type your own</small>
 
-  <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:10px;">
-    <button type="button" onclick="document.getElementById('loan_amount').value='500'" style="flex:1; padding:10px; border:1px solid #0a7cff; background:#fff; color:#0a7cff; border-radius:8px; font-weight:bold; cursor:pointer;">R500</button>
-    <button type="button" onclick="document.getElementById('loan_amount').value='1000'" style="flex:1; padding:10px; border:1px solid #0a7cff; background:#fff; color:#0a7cff; border-radius:8px; font-weight:bold; cursor:pointer;">R1000</button>
-    <button type="button" onclick="document.getElementById('loan_amount').value='2000'" style="flex:1; padding:10px; border:1px solid #0a7cff; background:#fff; color:#0a7cff; border-radius:8px; font-weight:bold; cursor:pointer;">R2000</button>
-    <button type="button" onclick="document.getElementById('loan_amount').value='3000'" style="flex:1; padding:10px; border:1px solid #0a7cff; background:#fff; color:#0a7cff; border-radius:8px; font-weight:bold; cursor:pointer;">R3000</button>
-  </div>
+<!-- LOAN AMOUNT - EDITED: Type own amount + Quick Buttons -->
+<label>How much do you want to borrow? (Amount in Rands) *</label>
+<input name="Loan Amount" id="amount" type="number" required min="100" max="10000" step="50" placeholder="e.g. 1000 - type your own amount" oninput="calc()">
+<small style="color:#666;">Tap a quick amount or type your own between R100 and R10 000</small>
+<div class="amount-btns">
+  <button type="button" onclick="setAmount(500,this)">R500</button>
+  <button type="button" onclick="setAmount(1000,this)">R1000</button>
+  <button type="button" onclick="setAmount(1500,this)">R1500</button>
+  <button type="button" onclick="setAmount(2000,this)">R2000</button>
+  <button type="button" onclick="setAmount(3000,this)">R3000</button>
+  <button type="button" onclick="setAmount(5000,this)">R5000</button>
 </div>
 
 <div class="calc" id="calcBox">Select amount to see example repayment. Final cost will be in your Pre-Agreement as per NCA.</div>
 <script>
+function setAmount(val, btn){
+  document.getElementById('amount').value = val;
+  document.querySelectorAll('.amount-btns button').forEach(b => b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  calc();
+}
 function calc(){
   let a = document.getElementById('amount').value;
   // Example ONLY: 50% total cost example as requested by owner - to be replaced by NCA schedule in Pre-Agreement
