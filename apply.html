@@ -25,7 +25,7 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ccc;border-radiu
 <p>Workers & SASSA Pensioners Welcome • Delft South</p>
 
 <!-- CREDIT PROVIDER METHOD: FormSubmit sends all fields + files to Gmail -->
-<form action="https://formsubmit.co/kmochoari1980@gmail.com" method="POST" enctype="multipart/form-data">
+<form action="https://formsubmit.co/thandozamahle@gmail.com" method="POST" enctype="multipart/form-data">
 <input type="hidden" name="_subject" value="NEW CREDIT APPLICATION - INVESTER NCRCP20409">
 <input type="hidden" name="_captcha" value="false">
 <input type="hidden" name="_template" value="table">
@@ -33,7 +33,7 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ccc;border-radiu
 
 <label>Full Name & Surname *</label><input name="Full Name" required placeholder="As per ID">
 <label>ID Number *</label><input name="ID Number" required maxlength="13" placeholder="13-digit SA ID">
-<label>Cellphone / WhatsApp *</label><input name="Cellphone" required placeholder="073 707 2897">
+<label>Cellphone / WhatsApp *</label><input name="Cellphone" required placeholder="073 364 2819">
 <label>Are you a Worker or SASSA Pensioner? *</label>
 <select name="Client Type" required><option value="">Select</option><option>Worker</option><option>SASSA Pensioner</option><option>Self-Employed</option></select>
 <label>Employer / SASSA Grant Type</label><input name="Employer / Grant" placeholder="e.g. Shoprite / Old Age Grant">
@@ -41,7 +41,11 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ccc;border-radiu
 <label>Monthly Expenses (Rent, Food, Transport, Debts)</label><input name="Monthly Expenses" type="number" placeholder="e.g. 2500">
 <label>Loan Amount Needed *</label>
 <select name="Loan Amount" id="amount" required onchange="calc()">
-<option value="">Select</option><option value="500">R500</option><option value="1000">R1,000</option><option value="1500">R1,500</option><option value="2000">R2,000</option><option value="3000">R3,000</option><option value="5000">R5,000</option>
+<div class="form-group">
+  <label for="loan_amount">How much do you want to borrow? (Amount in Rands) *</label>
+  <input type="number" id="loan_amount" name="loan_amount" placeholder="e.g. 1000" min="100" max="10000" step="50" required>
+  <small style="color:#666;">Enter amount between R100 and R10 000</small>
+</div>
 </select>
 
 <div class="calc" id="calcBox">Select amount to see example repayment. Final cost will be in your Pre-Agreement as per NCA.</div>
